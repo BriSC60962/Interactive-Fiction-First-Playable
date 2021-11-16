@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interactive Fiction-First Playable", "Interactive Fiction-First Playable\Interactive Fiction-First Playable.csproj", "{3694858A-4B76-4DC2-ABED-9C8B461AC91B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3694858A-4B76-4DC2-ABED-9C8B461AC91B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3694858A-4B76-4DC2-ABED-9C8B461AC91B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3694858A-4B76-4DC2-ABED-9C8B461AC91B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3694858A-4B76-4DC2-ABED-9C8B461AC91B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FA309B2-8324-4D5B-885D-B610734F9F0C}
+	EndGlobalSection
+EndGlobal
