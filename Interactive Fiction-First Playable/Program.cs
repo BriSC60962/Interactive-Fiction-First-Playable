@@ -13,26 +13,27 @@ namespace Interactive_Fiction_First_Playable
             bool active = true;
 
             string[] story = new string[]
-            {"Interactive Fiction - First Playable\nBy: Brianna Chisholm\nLogic and Programming I\nNovember 26th 2021;;;1;2;",
-             "Options1;A;B;3;4;",
-             "Options2;A;B;5;6;",
-             "Options3;A;B;7;8;",
-             "Options4;A;B;9;10;",
-             "Options5;A;B;11;12;",
-             "Options6;A;B;13;14;",
-             "Options7;A;B;15;16;",
-            "End1;1;;;;",
-            "End2;1;;;;",
-            "End3;1;;;;",
-            "End4;1;;;;",
+            {"Interactive Fiction - First Playable\nBy: Brianna Chisholm\nLogic and Programming I\nNovember 26th 2021;;;1;;",
+             "Page 1\n\nEnter woods Left or Right;A;B;2;3;",
+             "Page 2\n\nfollow the wisps? follow the yellow brick road?;A;B;4;5;",
+             "Page 3\n\npath 1 path 2;A;B;6;7;",
+             "Page 4\n\nred apple? trail of candy?;A;B;8;9;",
+             "Page 5\n\nbear tracks? torn red hood?;A;B;10;11;",
+             "Page 6\n\n;A;B;12;13;",
+             "Page 7\n\n;A;B;14;15;",
+            "apple end;1;;;;",
+            "candy end;1;;;;",
+            "bear end;1;;;;",
+            "red end;1;;;;",
             "End5;1;;;;",
             "End6;1;;;;",
             "End7;1;;;;",
             "End8;1;;;;"};
-           
+
             char[] charSeparators = new char[] { ';' };
             string[] result;
             int pageNumber = 0;
+
             while (active == true)
             {
                 result = story[pageNumber].Split(charSeparators, StringSplitOptions.None);
@@ -49,9 +50,9 @@ namespace Interactive_Fiction_First_Playable
                 {
                     Console.WriteLine();
                     Console.Write("Please input your selection by typing ");
-                    Console.Write(result[1]);
+                    Console.Write("\"" + result[1] + "\"");
                     Console.Write(" or ");
-                    Console.Write(result[2]);
+                    Console.Write("\"" + result[2] + "\"");
                     Console.Write(" and hit the \"Enter\" key...");
                     Console.WriteLine();
                     Console.WriteLine();
@@ -91,4 +92,4 @@ namespace Interactive_Fiction_First_Playable
         }
     }
 }
- 
+
