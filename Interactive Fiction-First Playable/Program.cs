@@ -14,21 +14,21 @@ namespace Interactive_Fiction_First_Playable
 
             string[] story = new string[]
             {"Interactive Fiction - First Playable\nBy: Brianna Chisholm\nLogic and Programming I\nNovember 26th 2021;;;1;;",
-             " Page 1\n\n Walking in the woods one day, you stumble upon a small wooden doll.\n The doll gives off an unsettling aura, you contemplate taking the\n doll with you. Should you take the doll?\n\n A: Yes    B: No;A;B;2;3;",
-             " Page 2\n\n You pick up the doll and start to proceed through the woods, but the doll\n starts to tuck on your shirt pointing in another direction. It seemed\n desperate so you follow its directions without thinking, trusting its\n protecting you from something ahead. Suddenly you come to a fork in \n the road, the doll points to one direction but you can't help but \n feel uneasy. Trust the doll?\n\n A: Yes    B: No;A;B;4;5;",
-             " Page 3\n\n You leave the doll and proceed on your path, but you feel watched\n as you leave. As you walk you come across an old women in dark and\n tattered clothes, She asks you, \"have you seen a small wooden doll\n running around here? I've been looking everywhere for it.\"\n you think of the doll you passed by but it wasn't running around,\n perhaps its the one she looking for? Inform her of the doll?\n\n A: Yes    B: No;A;B;6;7;",
-             " Page 4\n\nred apple? trail of candy?;A;B;8;9;",
+             " Page 1\n\n Walking in the woods one day, you stumble upon a small wooden doll.\n The doll gives off an unsettling aura, you contemplate taking the\n doll with you. Should you take the doll?;A;B;2;3;",
+             " Page 2\n\n You pick up the doll and start to proceed through the woods, but the doll\n starts to tuck on your shirt pointing in another direction. It seemed\n desperate so you follow its directions without thinking, trusting its\n protecting you from something ahead. Suddenly you come to a fork in \n the road, the doll points to one direction but you can't help but \n feel uneasy. Trust the doll?;A;B;4;5;",
+             " Page 3\n\n You leave the doll and proceed on your path, but you can't help but\n feel watched as you leave. As you walk you come across an old women\n in dark and tattered clothes, She asks you, \"Have you seen a small\n wooden doll running around here? I've been looking everywhere for\n it.\" you think of the doll you passed by but it wasn't running\n around, perhaps its the one she looking for? Inform her of the doll?;A;B;6;7;",
+             " Page 4\n\n You follow the doll and approach a strange hut filled with wooden dolls\n caged and bound up, upon noticing you enter they all break into chaos\n trying to get your attention to release them. You ponder if there is a\n valid reason for their imprisonment. Release the wooden dolls?;A;B;8;9;",
              " Page 5\n\nbear tracks? torn red hood?;A;B;10;11;",
              " Page 6\n\n;A;B;12;13;",
              " Page 7\n\n;A;B;14;15;",
-            "apple end;1;;;;",
-            "candy end;1;;;;",
-            "bear end;1;;;;",
-            "red end;1;;;;",
-            "End5;1;;;;",
-            "End6;1;;;;",
-            "End7;1;;;;",
-            "End8;1;;;;"};
+            " You release the dolls and they all scatter into the woods, you reach\n into your pocket for the doll but its no longer with you, instead\n there is a note, it simply reads \"Thank You.\";End;;;;",
+            " You shake your head and turn to leave, the doll in your pocket leaps out\n to free the others. You can't help but hesitate and watch the dolls escape\n in droves, in mere moments they all crowd around you. As you back away and\n turn you trip over one of the dolls into a boiling cauldron face first,\n the searing liquid drenches your face. You fall to the floor, you cannot\n see, you cannot see! YOU CANNOT SEE! Your face feels different, your face\n feels stiff, your face feels... Wooden...;End;;;;",
+            "bear end;End;;;;",
+            "red end;End;;;;",
+            "End5;End;;;;",
+            "End6;End;;;;",
+            "End7;End;;;;",
+            "End8;End;;;;"};
 
             char[] charSeparators = new char[] { ';' };
             string[] result;
@@ -39,7 +39,7 @@ namespace Interactive_Fiction_First_Playable
                 result = story[pageNumber].Split(charSeparators, StringSplitOptions.None);
                 Console.WriteLine(result[0]);
                 Console.ReadKey(true);
-                if (result[1] == "1")
+                if (result[1] == "End")
                 {
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -48,6 +48,10 @@ namespace Interactive_Fiction_First_Playable
                 }
                 else if (result[1] == "A")
                 {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.Write("A: Yes    B: No");
+                    Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("Please input your selection by typing ");
                     Console.Write("\"" + result[1] + "\"");
