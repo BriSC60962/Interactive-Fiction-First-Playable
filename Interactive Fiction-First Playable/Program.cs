@@ -12,7 +12,7 @@ namespace Interactive_Fiction_First_Playable
         {
             bool active = true;
 
-            string[] story = new string[]
+            string[] story = new string[] // The Title Page and Story
             {"Interactive Fiction - First Playable\nBy: Brianna Chisholm\nLogic and Programming I\nNovember 26th 2021;;;1;;", 
              " Page 1\n\n Walking in the woods to get to a friends house one day, you\n stumble upon a small wooden doll. The doll gives off an\n unsettling aura, you contemplate taking the doll with you.; Take the doll?; Leave the doll.;2;3;",
              " Page 2\n\n You pick up the doll and start to proceed through the woods, but the doll\n starts to tuck on your shirt pointing in another direction. It seemed\n desperate so you follow its directions without thinking, trusting its\n protecting you from something ahead. Suddenly you come to a fork in \n the road, the doll points to one direction but you can't help but \n feel uneasy.;Trust the doll.;ignore the doll.;4;5;",
@@ -29,8 +29,8 @@ namespace Interactive_Fiction_First_Playable
             " The very thought of chopping your hand off terrifies you,\n but not as much as turning into a TREE! You slice it off,\n and bolt out off the woods. You manage to avoid the curse\n but at the cost of losing a piece of yourself.;End;;;;",
             " You watch in a helpless panic, you can't stop the curse from\n spreading. Your arm... Your legs... Your neck, all slowly\n transforming into wood, no longer can you move them.\n Eventually you no longer represent the human you once\n were and become a tree among hundreds of others, and those\n who pass by would never know the difference...;End;;;;"};
 
-            char[] charSeparators = new char[] { ';' };
-            string[] result;
+            char[] charSeparators = new char[] { ';' }; //character separator used to use appropriate elements in the story array
+            string[] result; // String Name of elements in the Array
             int pageNumber = 0;
 
             while (active == true)
@@ -38,14 +38,15 @@ namespace Interactive_Fiction_First_Playable
                 result = story[pageNumber].Split(charSeparators, StringSplitOptions.None);
                 Console.WriteLine(result[0]);
                 Console.ReadKey(true);
-                if (result[1] == "End")
+
+                if (result[1] == "End") //Checks for Story Ending Page
                 {
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("THE END");
                     active = false;
                 }
-                else if (result[1] == "")
+                else if (result[1] == "") //Checks for empty element
                 {
                     Console.WriteLine();
                     pageNumber = Convert.ToInt32(result[3]);
@@ -63,23 +64,18 @@ namespace Interactive_Fiction_First_Playable
                     Console.WriteLine();
                     Console.Write("Key Input: ");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    string playerInput = Console.ReadLine().ToString();
-                    if (playerInput == "a")
+
+                    string playerInput = Console.ReadLine().ToString(); //Reads the keypress and directs to selected page
+                    if (playerInput == "a" || playerInput == "A")
                     {
                         pageNumber = Convert.ToInt32(result[3]);
                     }
-                    else if (playerInput == "A")
-                    {
-                        pageNumber = Convert.ToInt32(result[3]);
-                    }
-                    else if (playerInput == "b")
+                    
+                    else if (playerInput == "b" || playerInput == "B")
                     {
                         pageNumber = Convert.ToInt32(result[4]);
                     }
-                    else if (playerInput == "B")
-                    {
-                        pageNumber = Convert.ToInt32(result[4]);
-                    }
+                  
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
