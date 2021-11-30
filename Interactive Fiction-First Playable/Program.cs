@@ -10,71 +10,78 @@ namespace Interactive_Fiction_First_Playable
     {
         static int pageNumber = 0;
         static string[] readLines;
-        
+
         static void Main(string[] args)
         {
             bool active = true;
-            
-            readLines = System.IO.File.ReadAllLines(@"story.txt");
+
 
 
             char[] charSeparators = new char[] { ';' }; //character separator used to use appropriate elements in the story array
             string[] result; // String Name of elements in the Array
-           
+
+            readLines = System.IO.File.ReadAllLines(@"story.txt");
 
 
+            //TitlePage();
 
-            TitlePage();
-            
-            
+
             Console.ReadKey(true);
 
-            //while (active == true)
-            //{
-            //    result = story[pageNumber].Split(charSeparators, StringSplitOptions.None);
-            //    Console.WriteLine(result[0]);
-            //    Console.ReadKey(true);
+            while (active == true)
+            {
+                result = readLines[pageNumber].Split(charSeparators, StringSplitOptions.None);
+                Console.WriteLine(result[0]);
+                Console.ReadKey(true);
 
-            //    if (result[1] == "End") //Checks for Story Ending Page
-            //    {
-            //        Console.WriteLine();
-            //        Console.ForegroundColor = ConsoleColor.Yellow;
-            //        Console.WriteLine("THE END");
-            //        active = false;
-            //    }
-            //    else if (result[1] == "") //Checks for empty element
-            //    {
-            //        Console.WriteLine();
-            //        pageNumber = Convert.ToInt32(result[3]);
-            //    }
-            //    else
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Cyan;       
-            //        Console.WriteLine();
-            //        Console.WriteLine(" A: " + result[1]);
-            //        Console.WriteLine(" B: " + result[2]);
-            //        Console.WriteLine();
-            //        Console.ForegroundColor = ConsoleColor.Yellow;
-            //        Console.Write("Please input your selection by typing the \"A\" or \"B\" keys hit the \"Enter\" key...");
-            //        Console.WriteLine();
-            //        Console.WriteLine();
-            //        Console.Write("Key Input: ");
-            //        Console.ForegroundColor = ConsoleColor.Gray;
+                if (result[1] == "End") //Checks for Story Ending Page
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("THE END");
+                    Console.ReadKey(true);
+                    active = false;
+                }
+                else if (result[1] == "") //Checks for empty element
+                {
+                    Console.WriteLine();
+                    pageNumber = Convert.ToInt32(result[3]);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine();
+                    Console.WriteLine(" A: " + result[1]);
+                    Console.WriteLine(" B: " + result[2]);
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Please input your selection by typing the \"A\" or \"B\" keys hit the \"Enter\" key...");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.Write("Key Input: ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
 
-            //       string playerInput = Console.ReadLine().ToString(); //Reads the keypress and directs to selected page
-            //        if (playerInput == "a" || playerInput == "A")
-            //        {
-            //            pageNumber = Convert.ToInt32(result[3]);
-            //        }
+                    string playerInput = Console.ReadLine().ToString(); //Reads the keypress and directs to selected page
+                    if (playerInput == "a" || playerInput == "A")
+                    {
+                        pageNumber = Convert.ToInt32(result[3]);
+                    }
 
-            //        else if (playerInput == "b" || playerInput == "B")
-            //        {
-            //            pageNumber = Convert.ToInt32(result[4]);
-            //        }
+                    else if (playerInput == "b" || playerInput == "B")
+                    {
+                        pageNumber = Convert.ToInt32(result[4]);
+                    }
+                    else if (playerInput == "s" || playerInput == "S")
+                    {
+                        Console.WriteLine("Game has been Saved");
+                        string savefile = pageNumber.ToString();
+                        System.IO.File.WriteAllText("savegame.txt", savefile);
+                    }
 
-            //        Console.WriteLine();
-            //        Console.ForegroundColor = ConsoleColor.Gray;
-            //    }
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+            }
         }
         //"Interactive Fiction - First Playable\nBy: Brianna Chisholm\nLogic and Programming I\nNovember 26th 2021;;;1;;", 
         //     " Page 1\n\n Walking in the woods to get to a friends house one day, you\n stumble upon a small wooden doll. The doll gives off an\n unsettling aura, you contemplate taking the doll with you.; Take the doll?; Leave the doll.;2;3;",
@@ -91,31 +98,42 @@ namespace Interactive_Fiction_First_Playable
         //    " You feel safe with this charm as if it provides you with clarity\n of mind, and you proceeds through the thickets of the woods as if\n its nothing. Making it to your friends timely and safely.;End;;;;",
         //    " The very thought of chopping your hand off terrifies you,\n but not as much as turning into a TREE! You slice it off,\n and bolt out off the woods. You manage to avoid the curse\n but at the cost of losing a piece of yourself.;End;;;;",
         //    " You watch in a helpless panic, you can't stop the curse from\n spreading. Your arm... Your legs... Your neck, all slowly\n transforming into wood, no longer can you move them.\n Eventually you no longer represent the human you once\n were and become a tree among hundreds of others, and those\n who pass by would never know the difference...;End;;;;"};
-        static void TitlePage()
-        {
-            //Title Page Contents
-            Console.WriteLine(readLines[0]);
-            Console.WriteLine(readLines[1]);
-            Console.WriteLine(readLines[2]);
-            Console.WriteLine(readLines[3]);
-            Console.WriteLine();
-            Console.WriteLine("Press the \"N\",\"L\", or \"Q\" keys to select: ");
-            Console.WriteLine("New Game");
-            Console.WriteLine("Load Game");
-            Console.WriteLine("Quit Game");
-            Console.WriteLine();
-            Console.Write("Key Input: ");
-            string playerInput = Console.ReadLine().ToString();
-            if (playerInput == "s" || playerInput == "S")
-            {
-                Console.WriteLine("Game has been Saved");
-                string savefile = pageNumber.ToString();
-                System.IO.File.WriteAllText("savegame.txt", savefile);
-            }
-        }
+        //static void TitlePage()
+        //{
+        //    //Title Page Contents
+        //    Console.WriteLine(readLines[0]);
+        //    Console.WriteLine(readLines[1]);
+        //    Console.WriteLine(readLines[2]);
+        //    Console.WriteLine(readLines[3]);
+        //    Console.WriteLine();
+        //    Console.WriteLine("Press the \"N\",\"L\", or \"Q\" keys to select: ");
+        //    Console.WriteLine();
+        //    Console.WriteLine("New Game");
+        //    Console.WriteLine("Load Game");
+        //    Console.WriteLine("Quit Game");
+        //    Console.WriteLine();
+        //    Console.Write("Key Input: ");
+        //    string playerInput = Console.ReadLine().ToString();
+        //    //if (playerInput == "s" || playerInput == "S")
+        //    //{
+        //    //    Console.WriteLine("Game has been Saved");
+        //    //    string savefile = pageNumber.ToString();
+        //    //    System.IO.File.WriteAllText("savegame.txt", savefile);
+        //    //}
+        //    if (playerInput == "n" || playerInput == "N") //New Game
+        //    {
+              
+
+        //    }
+        //    else if (playerInput == "l" || playerInput == "L") //Load Game
+        //    {
+                
+        //    }
+        //    else if (playerInput == "q" || playerInput == "Q") //Quit Game
+        //    {
+                
+        //    }
+        //}
 }
     
     }
-
-
-
