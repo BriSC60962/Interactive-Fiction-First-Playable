@@ -8,6 +8,7 @@ namespace Interactive_Fiction_First_Playable
 {
     class Program
     {
+        static int pageNumber = 0;
         static string[] readLines;
         
         static void Main(string[] args)
@@ -19,7 +20,7 @@ namespace Interactive_Fiction_First_Playable
 
             char[] charSeparators = new char[] { ';' }; //character separator used to use appropriate elements in the story array
             string[] result; // String Name of elements in the Array
-            int pageNumber = 0;
+           
 
 
 
@@ -60,7 +61,7 @@ namespace Interactive_Fiction_First_Playable
             //        Console.Write("Key Input: ");
             //        Console.ForegroundColor = ConsoleColor.Gray;
 
-            //        string playerInput = Console.ReadLine().ToString(); //Reads the keypress and directs to selected page
+            //       string playerInput = Console.ReadLine().ToString(); //Reads the keypress and directs to selected page
             //        if (playerInput == "a" || playerInput == "A")
             //        {
             //            pageNumber = Convert.ToInt32(result[3]);
@@ -97,6 +98,20 @@ namespace Interactive_Fiction_First_Playable
             Console.WriteLine(readLines[1]);
             Console.WriteLine(readLines[2]);
             Console.WriteLine(readLines[3]);
+            Console.WriteLine();
+            Console.WriteLine("Press the \"N\",\"L\", or \"Q\" keys to select: ");
+            Console.WriteLine("New Game");
+            Console.WriteLine("Load Game");
+            Console.WriteLine("Quit Game");
+            Console.WriteLine();
+            Console.Write("Key Input: ");
+            string playerInput = Console.ReadLine().ToString();
+            if (playerInput == "s" || playerInput == "S")
+            {
+                Console.WriteLine("Game has been Saved");
+                string savefile = pageNumber.ToString();
+                System.IO.File.WriteAllText("savegame.txt", savefile);
+            }
         }
 }
     
