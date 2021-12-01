@@ -26,7 +26,7 @@ namespace Interactive_Fiction_First_Playable
             //TitlePage();
 
 
-            Console.ReadKey(true);
+            
 
             while (active == true)
             {
