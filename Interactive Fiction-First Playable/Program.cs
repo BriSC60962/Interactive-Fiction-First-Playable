@@ -29,8 +29,11 @@ namespace Interactive_Fiction_First_Playable
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("THE END");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine();
                     Console.ReadKey(true);
-                    active = false;
+                    TitlePage();
+                    
                 }
                 else if (result[1] == "") //Checks for empty element
                 {
@@ -91,7 +94,7 @@ namespace Interactive_Fiction_First_Playable
         static void TitlePage()
         {
             //Title Page Contents
-            Console.WriteLine("Interactive Fiction - First Playable");
+            Console.WriteLine("The Doll in the Woods");
             Console.WriteLine("By: Brianna Chisholm");
             Console.WriteLine("Logic and Programming I");
             Console.WriteLine("December 10th, 2021");
@@ -116,14 +119,15 @@ namespace Interactive_Fiction_First_Playable
             }
             else if (playerInput == "q" || playerInput == "Q") //Quit Game
             {
-                System.Environment.Exit(1);
+                active = false;
             }
             else
             {
+                Console.WriteLine();
+                Console.WriteLine("Invalid Input: Enter designated keys to select a path option.");
                 Console.WriteLine();
                 TitlePage();
             }
         }
     }
-    
-    }
+}
