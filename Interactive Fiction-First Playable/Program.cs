@@ -10,24 +10,14 @@ namespace Interactive_Fiction_First_Playable
     {
         static int pageNumber = 0;
         static string[] readLines;
-
+        static bool active = true;
         static void Main(string[] args)
         {
-            bool active = true;
-
-
-
+            TitlePage();
+            Console.WriteLine();
             char[] charSeparators = new char[] { ';' }; //character separator used to use appropriate elements in the story array
             string[] result; // String Name of elements in the Array
-
             readLines = System.IO.File.ReadAllLines(@"story.txt");
-
-
-            //TitlePage();
-
-
-            
-
             while (active == true)
             {
                 result = readLines[pageNumber].Split(charSeparators, StringSplitOptions.None);
@@ -98,42 +88,42 @@ namespace Interactive_Fiction_First_Playable
         //    " You feel safe with this charm as if it provides you with clarity\n of mind, and you proceeds through the thickets of the woods as if\n its nothing. Making it to your friends timely and safely.;End;;;;",
         //    " The very thought of chopping your hand off terrifies you,\n but not as much as turning into a TREE! You slice it off,\n and bolt out off the woods. You manage to avoid the curse\n but at the cost of losing a piece of yourself.;End;;;;",
         //    " You watch in a helpless panic, you can't stop the curse from\n spreading. Your arm... Your legs... Your neck, all slowly\n transforming into wood, no longer can you move them.\n Eventually you no longer represent the human you once\n were and become a tree among hundreds of others, and those\n who pass by would never know the difference...;End;;;;"};
-        //static void TitlePage()
-        //{
-        //    //Title Page Contents
-        //    Console.WriteLine(readLines[0]);
-        //    Console.WriteLine(readLines[1]);
-        //    Console.WriteLine(readLines[2]);
-        //    Console.WriteLine(readLines[3]);
-        //    Console.WriteLine();
-        //    Console.WriteLine("Press the \"N\",\"L\", or \"Q\" keys to select: ");
-        //    Console.WriteLine();
-        //    Console.WriteLine("New Game");
-        //    Console.WriteLine("Load Game");
-        //    Console.WriteLine("Quit Game");
-        //    Console.WriteLine();
-        //    Console.Write("Key Input: ");
-        //    string playerInput = Console.ReadLine().ToString();
-        //    //if (playerInput == "s" || playerInput == "S")
-        //    //{
-        //    //    Console.WriteLine("Game has been Saved");
-        //    //    string savefile = pageNumber.ToString();
-        //    //    System.IO.File.WriteAllText("savegame.txt", savefile);
-        //    //}
-        //    if (playerInput == "n" || playerInput == "N") //New Game
-        //    {
-              
-
-        //    }
-        //    else if (playerInput == "l" || playerInput == "L") //Load Game
-        //    {
-                
-        //    }
-        //    else if (playerInput == "q" || playerInput == "Q") //Quit Game
-        //    {
-                
-        //    }
-        //}
-}
+        static void TitlePage()
+        {
+            //Title Page Contents
+            Console.WriteLine("Interactive Fiction - First Playable");
+            Console.WriteLine("By: Brianna Chisholm");
+            Console.WriteLine("Logic and Programming I");
+            Console.WriteLine("December 10th, 2021");
+            Console.WriteLine();
+            Console.WriteLine("Press the \"N\",\"L\", or \"Q\" keys to select: ");
+            Console.WriteLine();
+            Console.WriteLine("New Game");
+            Console.WriteLine("Load Game");
+            Console.WriteLine("Quit Game");
+            Console.WriteLine();
+            Console.Write("Key Input: ");
+            string playerInput = Console.ReadLine().ToString();
+         
+            if (playerInput == "n" || playerInput == "N") //New Game
+            {
+                pageNumber = 0;
+            }
+            else if (playerInput == "l" || playerInput == "L") //Load Game
+            {
+                string loadLines = System.IO.File.ReadAllText(@"savegame.txt");
+                pageNumber = Convert.ToInt32(loadLines);
+            }
+            else if (playerInput == "q" || playerInput == "Q") //Quit Game
+            {
+                System.Environment.Exit(1);
+            }
+            else
+            {
+                Console.WriteLine();
+                TitlePage();
+            }
+        }
+    }
     
     }
