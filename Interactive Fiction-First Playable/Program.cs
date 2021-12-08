@@ -145,6 +145,8 @@ namespace Interactive_Fiction_First_Playable
                     Console.WriteLine();
                     Console.ReadKey(true);
                     MainMenu();
+                    Console.WriteLine();
+                    GameRun();
                 }
                 else if (result[1] == "") //Checks for empty element
                 {
