@@ -11,7 +11,7 @@ namespace Interactive_Fiction_First_Playable
         static int pageNumber = 0;
         static string[] readLines;
         static bool active = true;
-        static string[] result; // String Name of elements in the Array
+        static string[] result; 
         static void Main(string[] args)
         {
             MainMenu();
@@ -85,29 +85,39 @@ namespace Interactive_Fiction_First_Playable
         }
         static void GameRun() //Runs the while loop and "runs" the game
         {
-            char[] charSeparators = new char[] { ';' }; //character separator used to use appropriate elements in the story array
+            char[] charSeparators = new char[] { ';' }; 
             readLines = System.IO.File.ReadAllLines(@"story.txt");
             if (readLines.Length == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: story.txt is Empty");
                 Console.ReadKey(true);
-                return;
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
+                MainMenu();
+                Console.WriteLine();
+                GameRun();
             }
-            if (String.IsNullOrWhiteSpace(readLines[0]))
+            else if (String.IsNullOrWhiteSpace(readLines[0]))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: story.txt file contains blanks");
                 Console.ReadKey(true);
-                return;
+                MainMenu();
+                Console.WriteLine();
+                GameRun();
             }
+
+
 
             if (readLines.Length < 14)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: story.txt length is lower than expected");
                 Console.ReadKey(true);
-                return;
+                MainMenu();
+                Console.WriteLine();
+                GameRun();
             }
 
             else if (readLines.Length > 14)
@@ -115,7 +125,9 @@ namespace Interactive_Fiction_First_Playable
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: story.txt length is higher than expected");
                 Console.ReadKey(true);
-                return;
+                MainMenu();
+                Console.WriteLine();
+                GameRun();
             }
 
             while (active == true)
