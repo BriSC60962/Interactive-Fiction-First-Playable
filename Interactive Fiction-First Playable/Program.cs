@@ -32,17 +32,17 @@ namespace Interactive_Fiction_First_Playable
             Console.WriteLine("Quit Game");
             Console.WriteLine();
             Console.Write("Key Input: ");
-            string playerInput = Console.ReadLine().ToString();
+            ConsoleKeyInfo playerInput = Console.ReadKey(true);
          
-            if (playerInput == "n" || playerInput == "N") //New Game
+            if (playerInput.Key == ConsoleKey.N) //New Game
             {
                 pageNumber = 0;
             }
-            else if (playerInput == "l" || playerInput == "L") //Load Game
+            else if (playerInput.Key == ConsoleKey.L) //Load Game
             {
                 LoadGame();
             }
-            else if (playerInput == "q" || playerInput == "Q") //Quit Game
+            else if (playerInput.Key == ConsoleKey.Q) //Quit Game
             {
                 active = false;
             }
@@ -68,23 +68,24 @@ namespace Interactive_Fiction_First_Playable
         }
         static void KeyInput() //Reads key input and directs player to new page
         {
-            string playerInput = Console.ReadLine().ToString(); //Reads the keypress and directs to selected page
-            if (playerInput == "a" || playerInput == "A")
+            ConsoleKeyInfo playerInput = Console.ReadKey(true); //Reads the keypress and directs to selected page
+            if (playerInput.Key == ConsoleKey.A)
             {
                 pageNumber = Convert.ToInt32(result[3]);
             }
 
-            else if (playerInput == "b" || playerInput == "B")
+            else if (playerInput.Key == ConsoleKey.B)
             {
                 pageNumber = Convert.ToInt32(result[4]);
             }
-            else if (playerInput == "s" || playerInput == "S")
+            else if (playerInput.Key == ConsoleKey.S)
             {
                 SaveGame();
             }
         }
         static void GameRun() //Runs the while loop and "runs" the game
         {
+            
             char[] charSeparators = new char[] { ';' }; 
             readLines = System.IO.File.ReadAllLines(@"story.txt");
             if (readLines.Length == 0)
@@ -107,8 +108,37 @@ namespace Interactive_Fiction_First_Playable
                 Console.WriteLine();
                 GameRun();
             }
+            for (int j = 0; j < readLines.Length; j++)
+            {
+                int charNumber = 0;
 
+                for (int i = 0; i < readLines[j].Length; i++)
+                {
+                    if (readLines[j][i] == ';')
+                    {
+                        charNumber++;
+                    }
 
+                    if (charNumber < 5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("ERROR: The number of delimiters is too low");
+                        Console.ReadKey(true);
+                        MainMenu();
+                        Console.WriteLine();
+                        GameRun();
+                    }
+                    if (charNumber > 5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("ERROR: The number of delimiters is too high");
+                        Console.ReadKey(true);
+                        MainMenu();
+                        Console.WriteLine();
+                        GameRun();
+                    }
+                }
+            }
 
             if (readLines.Length < 14)
             {
@@ -132,6 +162,39 @@ namespace Interactive_Fiction_First_Playable
 
             while (active == true)
             {
+                for (int j = 0; j < readLines.Length; j++)
+                {
+                    int charNumber = 0;
+
+                    for (int i = 0; i < readLines[j].Length; i++)
+                    {
+                        if (readLines[j][i] == ';')
+                        {
+                            charNumber++;
+                        }
+
+                        if (charNumber < 5)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("ERROR: The number of delimiters is too low");
+                            Console.ReadKey(true);
+                            MainMenu();
+                            Console.WriteLine();
+                            GameRun();
+                        }
+                        if (charNumber > 5)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("ERROR: The number of delimiters is too high");
+                            Console.ReadKey(true);
+                            MainMenu();
+                            Console.WriteLine();
+                            GameRun();
+                        }
+
+                    }
+                }
+
                 result = readLines[pageNumber].Split(charSeparators, StringSplitOptions.None);
                 Console.WriteLine(result[0]);
                 Console.ReadKey(true);
