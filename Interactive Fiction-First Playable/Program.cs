@@ -120,18 +120,6 @@ namespace Interactive_Fiction_First_Playable
 
             }
 
-            if (pageNumber > 5)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ERROR: The number of delimiters is too high");
-                Console.ReadKey(true);
-                MainMenu();
-                Console.WriteLine();
-                GameRun();
-            }
-
-
-
             if (readLines.Length < 14)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
