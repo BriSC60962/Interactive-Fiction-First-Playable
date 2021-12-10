@@ -8,9 +8,9 @@ namespace Interactive_Fiction_First_Playable
 {
     class Program
     {
-        static int pageNumber = 0;
-        static string[] readLines;
-        static bool active = true;
+        static int pageNumber = 0; //Text within the elements
+        static string[] readLines; //Number of lines used in .txt
+        static bool active = true; //Runs Gameplay
         static string[] result; 
         static void Main(string[] args)
         {
@@ -20,18 +20,22 @@ namespace Interactive_Fiction_First_Playable
         }
         static void MainMenu() // Displays Title, Creator, Course, Date, and Main Menu Options
         {
+            
             Console.WriteLine("The Doll in the Woods");
             Console.WriteLine("By: Brianna Chisholm");
             Console.WriteLine("Logic and Programming I");
             Console.WriteLine("December 10th, 2021");
             Console.WriteLine();
-            Console.WriteLine("Press the \"N\",\"L\", or \"Q\" keys to select: ");
             Console.WriteLine();
-            Console.WriteLine("New Game");
-            Console.WriteLine("Load Game");
-            Console.WriteLine("Quit Game");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Please input your selection by typing the following keys: ");
             Console.WriteLine();
-            Console.Write("Key Input: ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("N = New Game");
+            Console.WriteLine("L = Load Game");
+            Console.WriteLine("Q = Quit Game");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
             ConsoleKeyInfo playerInput = Console.ReadKey(true);
          
             if (playerInput.Key == ConsoleKey.N) //New Game
@@ -49,7 +53,9 @@ namespace Interactive_Fiction_First_Playable
             else
             {
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid Input: Enter designated keys to select a path option.");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine();
                 MainMenu();
             }
@@ -86,7 +92,8 @@ namespace Interactive_Fiction_First_Playable
         static void GameRun() //Runs the while loop and "runs" the game
         {
             
-            char[] charSeparators = new char[] { ';' }; 
+            char[] charSeparators = new char[] { ';' };
+            
             readLines = System.IO.File.ReadAllLines(@"story.txt");
             if (readLines.Length == 0)
             {
@@ -99,46 +106,31 @@ namespace Interactive_Fiction_First_Playable
                 Console.WriteLine();
                 GameRun();
             }
-            else if (String.IsNullOrWhiteSpace(readLines[0]))
+            for (int b = 0; b < readLines.Length; b++)
+            {
+                if (String.IsNullOrWhiteSpace(readLines[b]))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("ERROR: story.txt file contains blanks");
+                    Console.ReadKey(true);
+                    MainMenu();
+                    Console.WriteLine();
+                    GameRun();
+                }
+
+            }
+
+            if (pageNumber > 5)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ERROR: story.txt file contains blanks");
+                Console.WriteLine("ERROR: The number of delimiters is too high");
                 Console.ReadKey(true);
                 MainMenu();
                 Console.WriteLine();
                 GameRun();
             }
-            for (int j = 0; j < readLines.Length; j++)
-            {
-                int charNumber = 0;
 
-                for (int i = 0; i < readLines[j].Length; i++)
-                {
-                    if (readLines[j][i] == ';')
-                    {
-                        charNumber++;
-                    }
 
-                    if (charNumber < 5)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("ERROR: The number of delimiters is too low");
-                        Console.ReadKey(true);
-                        MainMenu();
-                        Console.WriteLine();
-                        GameRun();
-                    }
-                    if (charNumber > 5)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("ERROR: The number of delimiters is too high");
-                        Console.ReadKey(true);
-                        MainMenu();
-                        Console.WriteLine();
-                        GameRun();
-                    }
-                }
-            }
 
             if (readLines.Length < 14)
             {
@@ -162,40 +154,23 @@ namespace Interactive_Fiction_First_Playable
 
             while (active == true)
             {
-                for (int j = 0; j < readLines.Length; j++)
+                result = readLines[pageNumber].Split(charSeparators, StringSplitOptions.None);
+                for (int b = 0; b < 14; b++)
                 {
-                    int charNumber = 0;
-
-                    for (int i = 0; i < readLines[j].Length; i++)
+                    if (String.IsNullOrWhiteSpace(readLines[b]))
                     {
-                        if (readLines[j][i] == ';')
-                        {
-                            charNumber++;
-                        }
-
-                        if (charNumber < 5)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("ERROR: The number of delimiters is too low");
-                            Console.ReadKey(true);
-                            MainMenu();
-                            Console.WriteLine();
-                            GameRun();
-                        }
-                        if (charNumber > 5)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("ERROR: The number of delimiters is too high");
-                            Console.ReadKey(true);
-                            MainMenu();
-                            Console.WriteLine();
-                            GameRun();
-                        }
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("ERROR: story.txt file contains blanks");
+                        Console.ReadKey(true);
+                        MainMenu();
+                        Console.WriteLine();
+                        GameRun();
+                    }
+                    else
+                    {
 
                     }
                 }
-
-                result = readLines[pageNumber].Split(charSeparators, StringSplitOptions.None);
                 Console.WriteLine(result[0]);
                 Console.ReadKey(true);
 
@@ -219,15 +194,15 @@ namespace Interactive_Fiction_First_Playable
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine();
-                    Console.WriteLine(" A: " + result[1]);
-                    Console.WriteLine(" B: " + result[2]);
-                    Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("Please input your selection by typing the \"A\" or \"B\" keys hit the \"Enter\" key...");
+                    Console.WriteLine();
+                    Console.Write("Please input your selection by typing the following keys: ");
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.Write("Key Input: ");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine(" A = " + result[1]);
+                    Console.WriteLine(" B = " + result[2]);
+                    Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Gray;
                     KeyInput();
                     Console.WriteLine();
